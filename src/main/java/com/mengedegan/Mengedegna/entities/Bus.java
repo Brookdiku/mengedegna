@@ -1,0 +1,49 @@
+package com.mengedegan.Mengedegna.entities;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "Buses")
+public class Bus {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "Plate number is required")
+    @Column(name = "plate_number", length = 20,unique = true)
+    private String plateNumber;
+
+    @Column(name = "total_seats")
+    private int totalSeats;
+
+    @NotBlank(message = "Grade is required.")
+    @Column(length = 10)
+    private String grade;
+
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "created_by", length = 50)
+    private String createdBy;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+    // Getters and setters are managed by lombok
+}
