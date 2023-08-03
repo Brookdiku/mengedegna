@@ -3,12 +3,9 @@ package com.mengedegan.Mengedegna.utilities;
 import org.springframework.http.HttpStatus;
 
 public class MengedegnaApiResponse<T> {
-    private T data;
-    private String message;
-
-
-
-    private HttpStatus status;
+    private final T data;
+    private final String message;
+    private final HttpStatus status;
 
     public MengedegnaApiResponse(T data, String message,HttpStatus status) {
         this.data = data;

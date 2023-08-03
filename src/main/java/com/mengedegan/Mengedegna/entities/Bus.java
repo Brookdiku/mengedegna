@@ -34,16 +34,6 @@ public class Bus {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime updatedAt;
 
-    @Column(name = "created_by", length = 50)
-    private String createdBy;
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-    // Getters and setters are managed by lombok
+    @Column(name = "created_by")
+    private Long createdBy;
 }

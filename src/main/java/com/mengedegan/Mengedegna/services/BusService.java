@@ -5,6 +5,8 @@ import com.mengedegan.Mengedegna.utilities.MengedegnaApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,7 @@ public class BusService implements IBusService{
                 message="Plate number already in use.";
                 return new MengedegnaApiResponse<>(null,message,HttpStatus.CONFLICT);
             }
+            bus.setCreatedAt(LocalDateTime.now());
             message="Bus successfully created.";
             return new MengedegnaApiResponse<>(busRepository.save(bus),message,HttpStatus.OK);
         } catch (Exception e) {
@@ -59,7 +62,8 @@ public class BusService implements IBusService{
             }else{
                 tempBus2.get().setUpdatedAt(bus.getCreatedAt());
                 tempBus2.get().setGrade(bus.getGrade());
-                tempBus2.get().setTotalSeats(bus.getTotalSeats());;
+                tempBus2.get().setTotalSeats(bus.getTotalSeats());
+                tempBus2.get().setUpdatedAt(LocalDateTime.now());
             }
             message="Successfully updated bus record.";
             return new MengedegnaApiResponse<>(busRepository.save(tempBus2.get()),message,HttpStatus.OK);
