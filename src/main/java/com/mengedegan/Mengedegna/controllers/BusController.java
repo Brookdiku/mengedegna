@@ -2,6 +2,7 @@ package com.mengedegan.Mengedegna.controllers;
 
 import com.mengedegan.Mengedegna.entities.Bus;
 import com.mengedegan.Mengedegna.services.IBusService;
+import com.mengedegan.Mengedegna.utilities.MengedegnaApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class BusController {
     IBusService busService;
 
     @PostMapping("/buses")
-    public ResponseEntity<?> createBus(@Valid @RequestBody Bus bus) {
+    public MengedegnaApiResponse<Bus> createBus(@Valid @RequestBody Bus bus) {
         return busService.createBus(bus);
     }
 
@@ -25,18 +26,17 @@ public class BusController {
     }
 
     @GetMapping("/buses/{id}")
-    public Bus getBuses(@PathVariable("id") Long id) {
-        System.out.println("before the request "+id);
+    public MengedegnaApiResponse<Bus> getBus(@PathVariable("id") Long id) {
         return busService.getBus(id);
     }
 
     @PutMapping("/buses/{id}")
-    public Bus updateBus(@Valid  @RequestBody Bus bus, @PathVariable("id") Long id) {
+    public MengedegnaApiResponse<Bus> updateBus(@Valid  @RequestBody Bus bus, @PathVariable("id") Long id) {
         return busService.updateBus(bus, id);
     }
 
     @DeleteMapping("/buses/{id}")
-    public String deleteBus(@PathVariable("id") Long id) {
+    public MengedegnaApiResponse<Bus> deleteBus(@PathVariable("id") Long id) {
         return busService.deleteBus(id);
     }
 }

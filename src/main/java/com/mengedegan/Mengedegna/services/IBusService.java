@@ -1,14 +1,15 @@
 package com.mengedegan.Mengedegna.services;
 
 import com.mengedegan.Mengedegna.entities.Bus;
+import com.mengedegan.Mengedegna.utilities.MengedegnaApiResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface IBusService {
-    public ResponseEntity<?> createBus(Bus bus);
+    public MengedegnaApiResponse<Bus> createBus(Bus bus);
     public List<Bus> getBuses();
-    public Bus getBus(Long id);
-    public Bus updateBus(Bus bus, Long id);
-    public String deleteBus(Long id);
+    public MengedegnaApiResponse<Bus> getBus(Long id);
+    public MengedegnaApiResponse<Bus> updateBus(Bus bus, Long id);
+    public MengedegnaApiResponse<Bus> deleteBus(Long id);
 }
