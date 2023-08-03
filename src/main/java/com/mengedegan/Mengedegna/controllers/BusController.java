@@ -4,7 +4,6 @@ import com.mengedegan.Mengedegna.entities.Bus;
 import com.mengedegan.Mengedegna.services.IBusService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,17 +25,18 @@ public class BusController {
     }
 
     @GetMapping("/buses/{id}")
-    public Bus getBuses(@Param("id") Long id) {
+    public Bus getBuses(@PathVariable("id") Long id) {
+        System.out.println("before the request "+id);
         return busService.getBus(id);
     }
 
     @PutMapping("/buses/{id}")
-    public Bus updateBus(@Valid  @RequestBody Bus bus, @Param("id") Long id) {
+    public Bus updateBus(@Valid  @RequestBody Bus bus, @PathVariable("id") Long id) {
         return busService.updateBus(bus, id);
     }
 
     @DeleteMapping("/buses/{id}")
-    public String deleteBus(@Param("id") Long id) {
+    public String deleteBus(@PathVariable("id") Long id) {
         return busService.deleteBus(id);
     }
 }

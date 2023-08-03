@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 
 public class BusService implements IBusService{
@@ -33,12 +35,22 @@ public class BusService implements IBusService{
 
     @Override
     public Bus getBus(Long id) {
+        System.out.println("this  is the id ");
         return busRepository.findById(id).get();
     }
 
     @Override
     public Bus updateBus(Bus bus,Long id) {
-        return null;
+        Bus tempBus=busRepository.findByPlateNumber(bus.getPlateNumber());
+        Optional<Bus> tempBus2=busRepository.findById(id);
+        if(tempBus == null){
+            tempBus2.get().setPlateNumber(bus.getPlateNumber());
+        }else{
+            tempBus2.get().setUpdatedAt(bus.getCreatedAt());
+            tempBus2.get().setGrade(bus.getGrade());
+            tempBus2.get().setTotalSeats(bus.getTotalSeats());;
+        }
+        return busRepository.save(tempBus2.get());
     }
 
     @Override
