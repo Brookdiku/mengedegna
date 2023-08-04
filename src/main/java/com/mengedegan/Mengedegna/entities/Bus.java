@@ -1,5 +1,6 @@
 package com.mengedegan.Mengedegna.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +30,9 @@ public class Bus {
     @NotBlank(message = "Grade is required.")
     @Column(length = 10)
     private String grade;
-
+    @OneToMany(mappedBy = "bus")
+    @JsonManagedReference
+    private List<BusImage> images;
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
